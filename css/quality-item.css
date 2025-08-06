@@ -1,0 +1,111 @@
+@charset "UTF-8";
+:root {
+  /*colors*/
+  --c-main: #0d6327;
+  --c-main-lt: #bee0c7;
+  --c-feature: #000478;
+  --c-accent: #e8fe41;
+  --c-accent-active: #D20000;
+  --c-light: white;
+  --c-dark: #2a211c;
+  --c-dark-alt: #292a32;
+  --c-gray-dk: #9896a5;
+  --c-gray-lt: rgba(236, 235, 243, 0.3);
+  --c-gray: #9896a5;
+  --c-gray-lt-alt: #ecebf3;
+  --c-gray-lt-second: rgba(152, 150, 165, 0.327);
+  /*border radiuses*/
+  --b-radius-xs: 5px;
+  --b-radius-s: 10px;
+  --b-radius-m: 15px;
+  --b-radius-l: 20px;
+  --b-radius-circle: 1000px;
+  /*fonts*/
+  --font-base: "Vela sans", sans-serif;
+  --fz-xs-v: 16;
+  --fz-s-v: 18;
+  --fz-m-v: 20;
+  --fz-l-v: 25;
+  --fz-xl-v: 30;
+  --fz-xxl-v: 35;
+  --fz-xs: calc(var(--fz-xs-v) * 1px);
+  --fz-s: calc(var(--fz-s-v) * 1px);
+  --fz-m: calc(var(--fz-m-v) * 1px);
+  --fz-l: calc(var(--fz-l-v) * 1px);
+  --fz-xl: calc(var(--fz-xl-v) * 1px);
+  --fz-xxl: calc(var(--fz-xxl-v) * 1px);
+  /*containers*/
+  --screen: 1920;
+  --container-padding-x: 40px;
+  --container-width: 1920px;
+  --sections-gap-y: 80px;
+  --header-mobile-height: 154px;
+  --border: 2px solid var(--c-gray-lt-alt);
+  --shadowDown: 0 5px 0 var(--c-dark);
+  /*button and input heights*/
+  --btn-height: 70px;
+  --input-height: 60px;
+  /*optimal transition-duration*/
+  --trans-duration: 0.3s;
+  /*z-index*/
+  --z-header: 10;
+  --z-menu: 50;
+}
+@media (max-width: 1460px) {
+  :root {
+    --screen: 1460;
+    --fz-xs-v: 14;
+    --fz-s-v: 16;
+    --fz-l-v: 23;
+  }
+}
+@media (max-width: 1366px) {
+  :root {
+    --screen: 1366;
+    --btn-height: 60px;
+  }
+}
+@media (max-width: 1160px) {
+  :root {
+    --fz-xs-v: 16;
+    --fz-s-v: 18;
+    --screen: 1160;
+    --fz-l-v: 25;
+  }
+}
+@media (max-width: 710px) {
+  :root {
+    --screen: 720;
+    --sections-gap-y: clamp(40px, 8.3vw, 60px);
+    --header-mobile-height: clamp(103px, 21.3vw, 154px);
+    --container-padding-x: 20px;
+    --btn-height: 56px;
+    --input-height: 50px;
+  }
+}
+
+/*Делаем гибкий текст с динамическим изменением размером шрифта*/
+/*Флекс-центрирование*/
+/*Абсолютное центрирование*/
+.quality-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--b-radius-l);
+  padding: 20px;
+  border: var(--border);
+  border-color: var(--c-feature);
+  color: var(--c-dark);
+  text-align: center;
+}
+.quality-item__title {
+  font-size: clamp(20px, var(--fz-xl-v) / 1920 * 100vw, var(--fz-xl-v) * 1px);
+  font-weight: bold;
+  color: var(--c-feature);
+}
+.quality-item__description {
+  font-size: clamp(16px, var(--fz-m-v) / 1920 * 100vw, var(--fz-m-v) * 1px);
+  color: var(--c-dark);
+}/*# sourceMappingURL=quality-item.css.map */
