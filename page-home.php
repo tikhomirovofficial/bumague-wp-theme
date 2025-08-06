@@ -12,29 +12,22 @@ Template Name: Шаблон "Главная страница"
         <header class="section__header container">
             <div class="section__header-info">
                 <h1 class="section__title section__title--wide">
-                    <span class="c-main">Бумажечка</span> - цифровая
-                    типография в Москве
+                    <?php the_field('home_title'); ?>
                 </h1>
                 <div class="section__description section__description--wide">
-                    <p>
-                        Мы любим бумагу, графику и творчество, поэтому
-                        создаем
-                        полиграфию высокого качества и незабываемого
-                        стиля.
-                    </p>
+                    <?php the_field('home_description'); ?>
                 </div>
             </div>
             <div class="section__header-additional">
                 <div class="slogan">
-                    <div class="slogan__line">
-                        <span>быстро.</span>
-                    </div>
-                    <div class="slogan__line">
-                        <span>качественно.</span>
-                    </div>
-                    <div class="slogan__line">
-                        <span>со вкусом.</span>
-                    </div>
+                    <?php if (have_rows('home_slogan')): ?>
+                        <?php while (have_rows('home_slogan')):
+                            the_row(); ?>
+                            <div class="slogan__line"><span><?php the_sub_field('home_s_1'); ?></span></div>
+                            <div class="slogan__line"><span><?php the_sub_field('home_s_2'); ?></span></div>
+                            <div class="slogan__line"><span><?php the_sub_field('home_s_3'); ?></span></div>        
+                        <?php endwhile; ?>
+                    <?php endif; ?>                  
                 </div>
                 <button data-modal="quick-request-window" class="button button--accent" type="button">
                     <div class="button__decoration">
@@ -290,8 +283,10 @@ Template Name: Шаблон "Главная страница"
                 </div>
                 <div class="welcome__strengths">
                     <div class="print welcome__print">
-                        <img loading="lazy" class="print__bg" src="<?php echo get_template_directory_uri(); ?>/images/print/1.png" alt="">
-                        <img loading="lazy" class="print__bg" src="<?php echo get_template_directory_uri(); ?>/images/print/1.png" alt="">
+                        <img loading="lazy" class="print__bg"
+                            src="<?php echo get_template_directory_uri(); ?>/images/print/1.png" alt="">
+                        <img loading="lazy" class="print__bg"
+                            src="<?php echo get_template_directory_uri(); ?>/images/print/1.png" alt="">
                         <h2 class="print__title title--alt">
                             ПЕЧАТЬ ДЛЯ РЕСТОРАНОВ: ВСЁ ДЛЯ ВАШЕГО
                             ГОСТЕПРИИМСТВА
@@ -312,7 +307,8 @@ Template Name: Шаблон "Главная страница"
                             </h2>
                             <ul class="features__list">
                                 <li class="features__item">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg" loading="lazy" alt="" class="feature__icon">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg"
+                                        loading="lazy" alt="" class="feature__icon">
                                     <h3 class="features__item-title">
                                         Ответственность
                                     </h3>
@@ -324,7 +320,8 @@ Template Name: Шаблон "Главная страница"
                                     </div>
                                 </li>
                                 <li class="features__item">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg" loading="lazy" alt="" class="feature__icon">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg"
+                                        loading="lazy" alt="" class="feature__icon">
                                     <h3 class="features__item-title">
                                         Премиум-качество печати
                                     </h3>
@@ -339,7 +336,8 @@ Template Name: Шаблон "Главная страница"
                                     </div>
                                 </li>
                                 <li class="features__item">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg" loading="lazy" alt="" class="feature__icon">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg"
+                                        loading="lazy" alt="" class="feature__icon">
                                     <h3 class="features__item-title">
                                         Срочная печать
                                     </h3>
@@ -352,7 +350,8 @@ Template Name: Шаблон "Главная страница"
                                     </div>
                                 </li>
                                 <li class="features__item">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg" loading="lazy" alt="" class="feature__icon">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/feature.svg"
+                                        loading="lazy" alt="" class="feature__icon">
                                     <h3 class="features__item-title">
                                         Честность и открытость
                                     </h3>
@@ -383,34 +382,44 @@ Template Name: Шаблон "Главная страница"
                         </h2>
                         <ul class="clients__list">
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/1.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/1.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/2.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/2.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/3.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/3.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/4.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/4.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/5.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/5.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/6.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/6.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/7.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/7.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/8.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/8.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/9.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/9.png" alt="">
                             </li>
                             <li class="clients__item">
-                                <img class="clients__img" src="<?php echo get_template_directory_uri(); ?>/images/clients/10.png" alt="">
+                                <img class="clients__img"
+                                    src="<?php echo get_template_directory_uri(); ?>/images/clients/10.png" alt="">
                             </li>
                         </ul>
                     </div>
@@ -431,7 +440,8 @@ Template Name: Шаблон "Главная страница"
         <div class="section__body">
             <div class="work-steps container">
                 <div class="work-steps__img">
-                    <img width="447" height="64" src="<?php echo get_template_directory_uri(); ?>/images/icons/bumague-word.svg" alt="">
+                    <img width="447" height="64"
+                        src="<?php echo get_template_directory_uri(); ?>/images/icons/bumague-word.svg" alt="">
                 </div>
                 <ul class="work-steps__list">
                     <li class="work-steps__item">
@@ -900,7 +910,8 @@ Template Name: Шаблон "Главная страница"
                     </div>
                     <div class="reviews__slider-nav visible-mobile">
                         <button type="button" class="reviews__slider-nav-prev">
-                            <img style="scale: -1" src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
+                            <img style="scale: -1"
+                                src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
                         </button>
                         <button type="button" class="reviews__slider-nav-next">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
@@ -938,7 +949,8 @@ Template Name: Шаблон "Главная страница"
                             <div class="equipment-item">
                                 <span class="equipment-item__number">//01</span>
                                 <div class="equipment-item__img">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/equipment/1.png" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/equipment/1.png"
+                                        alt="">
                                 </div>
                                 <div class="equipment-item__title">
                                     Xerox Versant 3100
@@ -955,7 +967,8 @@ Template Name: Шаблон "Главная страница"
                             <div class="equipment-item">
                                 <span class="equipment-item__number">//02</span>
                                 <div class="equipment-item__img">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/equipment/2.png" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/equipment/2.png"
+                                        alt="">
                                 </div>
                                 <div class="equipment-item__title">
                                     Xerox J75
@@ -972,7 +985,8 @@ Template Name: Шаблон "Главная страница"
                             <div class="equipment-item">
                                 <span class="equipment-item__number">//03</span>
                                 <div class="equipment-item__img">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/equipment/3.png" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/equipment/3.png"
+                                        alt="">
                                 </div>
                                 <div class="equipment-item__title">
                                     Plocmatic 5010e
@@ -989,7 +1003,8 @@ Template Name: Шаблон "Главная страница"
                     <a href="" class="button equipment__link button--arrow">
                         <span class="title--alt">Смотреть всё оборудование</span>
                         <div class="button__arrow-icon">
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/arrow-down-right.svg" alt="">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/arrow-down-right.svg"
+                                alt="">
                         </div>
                     </a>
                 </div>
@@ -1016,43 +1031,53 @@ Template Name: Шаблон "Главная страница"
                 <div class="projects__slider swiper">
                     <div class="projects__slider-wrapper swiper-wrapper">
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/1.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/1.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/2.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/2.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/3.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/3.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/4.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/4.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/5.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/5.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/1.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/1.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/2.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/2.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/3.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/3.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/4.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/4.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                         <div class="projects__slider-slide swiper-slide">
-                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/5.jpg');" class="projects__item">
+                            <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/projects/5.jpg');"
+                                class="projects__item">
                             </div>
                         </div>
                     </div>
@@ -1098,7 +1123,8 @@ Template Name: Шаблон "Главная страница"
                                 <div class="faq__accordion-state">
                                     <span>больше</span>
                                     <span>меньше</span>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/arro-down-right-dark.svg" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/arro-down-right-dark.svg"
+                                        alt="">
                                 </div>
                             </label>
                             <div class="accordion__content">
@@ -1218,10 +1244,13 @@ Template Name: Шаблон "Главная страница"
                                     </div>
                                     <div class="faq__slider-nav visible-mobile">
                                         <button type="button" class="faq__slider-nav-prev">
-                                            <img style="scale: -1" src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
+                                            <img style="scale: -1"
+                                                src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg"
+                                                alt="">
                                         </button>
                                         <button type="button" class="faq__slider-nav-next">
-                                            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg"
+                                                alt="">
                                         </button>
                                     </div>
                                 </div>
@@ -1238,7 +1267,8 @@ Template Name: Шаблон "Главная страница"
                                 <div class="faq__accordion-state">
                                     <span>больше</span>
                                     <span>меньше</span>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/arro-down-right-dark.svg" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/icons/arro-down-right-dark.svg"
+                                        alt="">
                                 </div>
                             </label>
                             <div class="accordion__content">
@@ -1358,10 +1388,13 @@ Template Name: Шаблон "Главная страница"
                                     </div>
                                     <div class="faq__slider-nav visible-mobile">
                                         <button type="button" class="faq__slider-nav-prev">
-                                            <img style="scale: -1" src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
+                                            <img style="scale: -1"
+                                                src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg"
+                                                alt="">
                                         </button>
                                         <button type="button" class="faq__slider-nav-next">
-                                            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg" alt="">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/slider-arrow.svg"
+                                                alt="">
                                         </button>
                                     </div>
                                 </div>
@@ -1378,7 +1411,8 @@ Template Name: Шаблон "Главная страница"
         <h2 class="visually-hidden">Наши контакты</h2>
         <div class="section__body">
             <div class="contacts container">
-                <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/icons/m_decoration.svg');" class="contacts__inner">
+                <div style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/icons/m_decoration.svg');"
+                    class="contacts__inner">
                     <div class="contacts__info">
                         <header class="contacts__info-header">
                             <address class="contacts__info-address">
@@ -1389,10 +1423,14 @@ Template Name: Шаблон "Главная страница"
                             </address>
                             <div class="contacts__info-socials">
                                 <a href="#">
-                                    <img height="56" width="56" loading="lazy" src="<?php echo get_template_directory_uri(); ?>/images/icons/telegram.svg" alt="">
+                                    <img height="56" width="56" loading="lazy"
+                                        src="<?php echo get_template_directory_uri(); ?>/images/icons/telegram.svg"
+                                        alt="">
                                 </a>
                                 <a href="#">
-                                    <img height="56" width="56" loading="lazy" src="<?php echo get_template_directory_uri(); ?>/images/icons/whatsapp.svg" alt="">
+                                    <img height="56" width="56" loading="lazy"
+                                        src="<?php echo get_template_directory_uri(); ?>/images/icons/whatsapp.svg"
+                                        alt="">
                                 </a>
                             </div>
                         </header>
