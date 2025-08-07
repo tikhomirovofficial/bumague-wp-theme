@@ -60,7 +60,8 @@
 			<header class="window__header">
 				<h2 class="window__title">Заявка на полиграфию</h2>
 				<button class="window__close-btn">
-					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg" alt="">
+					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg"
+						alt="">
 				</button>
 			</header>
 			<form class="window__form">
@@ -139,7 +140,8 @@
 						<input type="file" id="request-files" class="field__upload-input visually-hidden" multiple
 							accept=".jpg,.jpeg,.png,.pdf">
 						<label for="request-files" class="field__upload-preview">
-							<img loading="lazy" height="40" width="40" src="<?php echo get_template_directory_uri(); ?>/images/icons/upload.svg" alt="">
+							<img loading="lazy" height="40" width="40"
+								src="<?php echo get_template_directory_uri(); ?>/images/icons/upload.svg" alt="">
 							<div class="field__upload-preview-text">
 								<span class="field__upload-preview-caption">
 									<span class="c-main">
@@ -175,7 +177,8 @@
 			<header class="window__header">
 				<h2 class="window__title c-main">Быстрый заказ полиграфии</h2>
 				<button class="window__close-btn">
-					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg" alt="">
+					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg"
+						alt="">
 				</button>
 			</header>
 			<form class="window__form">
@@ -225,7 +228,8 @@
 			<header class="window__header">
 				<h2 class="window__title"></h2>
 				<button class="window__close-btn">
-					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg" alt="">
+					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg"
+						alt="">
 				</button>
 			</header>
 			<div class="window__content">
@@ -248,7 +252,8 @@
 			<header class="window__header">
 				<h2 class="window__title"></h2>
 				<button class="window__close-btn">
-					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg" alt="">
+					<img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg"
+						alt="">
 				</button>
 			</header>
 			<div class="window__content">
@@ -288,8 +293,9 @@
 				</nav>
 				<div class="mobile-menu__contacts">
 					<div class="mobile-menu__contacts-info">
-						<a href="tel:+79266641488" class="mobile-menu__link">
-							+7 926 664 14 88
+						<a href="tel:<?php echo wp_normalize_phone(get_field("c_phone", "option")); ?>"" class="
+							mobile-menu__link">
+							<?php the_field("c_phone", "options"); ?>
 						</a>
 						<div class="mobile-menu__contacts-socials">
 							<a href="#">
@@ -311,11 +317,10 @@
 						</div>
 					</div>
 					<div class="mobile-menu__contacts-bottom">
-						<span class="mobile-menu__contacts-info-item">ПН-ПТ с 10:00 до 19:00</span>
-						<address class="mobile-menu__contacts-info-item">Москва, Самокатная 4,
-							строение 7</address>
-						<a href="mailto:a1@bumague.ru" class="mobile-menu__contacts-info-item">
-							a1@bumague.ru
+						<span class="mobile-menu__contacts-info-item"></span>
+						<address class="mobile-menu__contacts-info-item"> <?php the_field("c_address", "options"); ?></address>
+						<a href="mailto:<?php the_field("c_email", "option"); ?>" class="mobile-menu__contacts-info-item">
+							<?php the_field("c_email", "option"); ?>
 						</a>
 					</div>
 
@@ -328,24 +333,25 @@
 			<div class="header__top">
 				<address class="header__info">
 					<b class="header__info-accent">
-						ПН-ПТ с 10:00 до 19:00
+						<?php the_field("c_work_time", "option"); ?>
 					</b>
-					<span class="header__info-bottom">Москва, Самокатная 4,
-						строение 7</span>
+					<span class="header__info-bottom"> <?php the_field("c_address", "option"); ?></span>
 				</address>
 				<a href="#" class="header__logo logo">
-					bumague
+					<?php the_field("c_name", "option"); ?>
 				</a>
 				<div class="header__info header__top-contacts">
-					<a href="tel:+79266641488" class="header__info-accent">
-						+7 926 664 14 88
+					<a href="tel:<?php echo wp_normalize_phone(get_field("c_phone", "option")); ?>"
+						class="header__info-accent">
+						<?php the_field("c_phone", "option"); ?>
 					</a>
-					<a href="mailto:a1@bumague.ru" class="header__info-bottom">a1@bumague.ru</a>
+					<a href="mailto:<?php the_field("c_email", "option"); ?>"
+						class="header__info-bottom"><?php the_field("c_email", "option"); ?></a>
 				</div>
 			</div>
 			<div id="header-main" class="header__main">
 				<a href="#" class="logo header__main-logo">
-					bumague
+					<?php the_field("c_name", "option"); ?>
 				</a>
 				<nav class="header__nav">
 					<ul class="header__nav-list">
@@ -372,14 +378,17 @@
 					</ul>
 				</nav>
 				<div class="header__contacts">
-					<a href="tel:+79266641488" class="header__contacts-link">
-						+7 926 664 14 88
+					<a href="tel:<?php echo wp_normalize_phone(get_field("c_phone", "option")); ?>"" class="
+						header__contacts-link">
+						<?php the_field("c_phone", "option"); ?>
 					</a>
 					<a href="https://wa.me/79266641488" class="header__contacts-link">
-						<img height="29" width="29" src="<?php echo get_template_directory_uri(); ?>/images/icons/whatsapp.svg" alt="">
+						<img height="29" width="29"
+							src="<?php echo get_template_directory_uri(); ?>/images/icons/whatsapp.svg" alt="">
 					</a>
-					<a href="tel:+79266641488" class="header__contacts-link">
-						<img height="30" width="30" src="<?php echo get_template_directory_uri(); ?>/images/icons/telegram.svg" alt="">
+					<a href="" class="header__contacts-link">
+						<img height="30" width="30"
+							src="<?php echo get_template_directory_uri(); ?>/images/icons/telegram.svg" alt="">
 					</a>
 				</div>
 				<button type="button" class="header__burger-btn button">

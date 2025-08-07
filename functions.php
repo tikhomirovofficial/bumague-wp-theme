@@ -176,3 +176,49 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+if (function_exists("acf_add_options_page")) {
+    acf_add_options_page(array(
+        "page_title" => "Настройка общего контента",
+        "menu_title" => "Общий контент",
+        "menu_slug"  => "theme_settings",
+    ));
+}
+
+/**
+ * Нормализация телефонного номера для WordPress
+ * Преобразует любой формат номера в +79266641488
+ */
+function wp_normalize_phone($phone) {
+    // Удаляем все нецифровые символы
+    $digits = preg_replace('/[^0-9]/', '', $phone);
+    
+    // Обработка российских номеров
+    if (strlen($digits) >= 11) {
+        // Если номер начинается с 8, заменяем на 7
+        if ($digits[0] == '8') {
+            $digits = '7' . substr($digits, 1);
+        }
+        // Если номер начинается с 7, просто добавляем +
+        elseif ($digits[0] == '7') {
+            $digits = '+' . $digits;
+        }
+        // Для номеров без кода страны (начинаются с 9...) добавляем +7
+        elseif (strlen($digits) == 10 && $digits[0] == '9') {
+            $digits = '+7' . $digits;
+        }
+    }
+    
+    // Для коротких номеров (например, 8800) оставляем как есть
+    if (strlen($digits) <= 6) {
+        return $phone;
+    }
+    
+    return $digits;
+}
+
+// Шорткод для использования в редакторе WordPress
+add_shortcode('normalize_phone', function($atts) {
+    $atts = shortcode_atts(['phone' => ''], $atts);
+    return wp_normalize_phone($atts['phone']);
+});
