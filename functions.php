@@ -224,7 +224,7 @@ add_shortcode('normalize_phone', function($atts) {
 });
 
 
-// Добавьте это в functions.php
+// ФИЛЬТРАЦИЯ СТАТЕЙ
 
 // Обработчик AJAX для фильтрации
 add_action('wp_ajax_filter_blog_by_category', 'filter_blog_by_category_callback');
@@ -285,6 +285,64 @@ function filter_blog_by_category_callback() {
                     </a>
                 </article>
             </div>
+            <?php
+        }
+        wp_reset_postdata();
+    }
+    
+    wp_die(); // Обязательно завершаем AJAX-запрос
+}
+
+// Обработчик AJAX для фильтрации портфолио
+add_action('wp_ajax_filter_portfolio', 'filter_portfolio_callback');
+add_action('wp_ajax_nopriv_filter_portfolio', 'filter_portfolio_callback');
+
+function filter_portfolio_callback() {
+    // Проверка nonce для безопасности
+    check_ajax_referer('portfolio_nonce', 'security');
+    
+    $category = sanitize_text_field($_POST['category'] ?? 'all');
+    $page = absint($_POST['page'] ?? 1);
+    
+    $args = [
+        'post_type'      => 'gallery',
+        'posts_per_page' => 12,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'post_status'    => 'publish',
+        'paged'          => $page
+    ];
+    
+    // Фильтр по категории если выбрана конкретная
+    if ($category !== 'all') {
+        $args['tax_query'] = [
+            [
+                'taxonomy' => 'portfolio_category',
+                'field'    => 'slug',
+                'terms'    => $category
+            ]
+        ];
+    }
+    
+    $query = new WP_Query($args);
+    
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $gallery_img = get_field('gallery_img');
+            ?>
+            <li class="portfolio__gallery-item" 
+                style="background-image: url('<?php echo $gallery_img ? esc_url($gallery_img) : esc_url(get_template_directory_uri() . '/images/projects/portfolio.jpg'); ?>')"
+                data-categories="<?php 
+                    $terms = get_the_terms(get_the_ID(), 'portfolio_category');
+                    if ($terms && !is_wp_error($terms)) {
+                        $term_slugs = array_map(function($term) { 
+                            return $term->slug; 
+                        }, $terms);
+                        echo esc_attr(implode(' ', $term_slugs));
+                    }
+                ?>">
+            </li>
             <?php
         }
         wp_reset_postdata();
