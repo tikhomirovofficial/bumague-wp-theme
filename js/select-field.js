@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const text = this.textContent;
 
                 // Обновляем кастомный input
-                customInput.value = text;
+                customInput.value = text.trim();
 
                 // Обновляем реальный select
-                realSelect.value = value;
+                realSelect.value = value.trim();
 
                 // Помечаем выбранную опцию
                 customOptions.forEach(opt => opt.classList.remove('selected'));
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (selectedOption.value) {
                 const customOption = selectField.querySelector(`.field__select-option[data-value="${selectedOption.value}"]`);
                 if (customOption) {
-                    customInput.value = selectedOption.text;
+                    customInput.value = selectedOption.text.trim();
                     customOption.classList.add('selected');
                 }
             }
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Обновляем кастомный input
                     const customInput = selectField.querySelector('.field__select-input');
-                    customInput.value = text;
+                    customInput.value = text.trim();
 
                     // Обновляем реальный select
                     realSelect.value = value;

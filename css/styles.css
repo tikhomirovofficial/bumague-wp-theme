@@ -1236,6 +1236,7 @@ h4 {
 }
 @media (max-width: 710px) {
   .features__main {
+    width: 100%;
     padding: 40px clamp(15px, 2.77vw, 20px);
   }
 }
@@ -1979,6 +1980,10 @@ h4 {
 .mobile-menu__contacts-info-item {
   font-size: var(--fz-xs);
   font-weight: 600;
+}
+
+.mobile-menu__contacts-info-item .c-main {
+  color: var(--c-light) !important;
 }
 .mobile-menu__list {
   flex-direction: column;
@@ -2870,8 +2875,8 @@ h4 {
   flex-direction: column;
   row-gap: 40px;
 }
-.welcome__print {
-  height: 100%;
+.welcome__strengths .print {
+height: 100%;
 }
 
 .reviews {
@@ -3652,12 +3657,6 @@ h4 {
     justify-content: center;
   }
 }
-@media (max-width: 710px) {
-  .footer__services-item:nth-last-child(1),
-  .footer__services-item:nth-last-child(2) {
-    display: none;
-  }
-}
 
 .service-hero {
   display: grid;
@@ -3719,7 +3718,7 @@ h4 {
 .service-hero__gallery-img {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background: center/cover no-repeat;
 }
 @media (max-width: 1160px) {
   .service-hero__gallery-img {
@@ -4418,19 +4417,20 @@ input:checked ~ .calculator__option-checkbox::after {
   max-height: unset;
   height: 100%;
 }
-.common-services__print {
+.common-services__grid .print {
   grid-row: 3/-1;
 }
+
 @media (max-width: 1160px) {
   .common-services__print {
     display: none;
   }
 }
-.common-services__print--tablet {
+.common-services__inner > .print {
   display: none;
 }
 @media (max-width: 1160px) {
-  .common-services__print--tablet {
+  .common-services__inner > .print {
     display: block;
   }
 }

@@ -6,96 +6,121 @@
 
 <footer class="footer">
     <div class="footer__inner">
-        <div class="footer__main ">
+        <div class="footer__main">
             <div class="footer__main-top container">
                 <div class="footer__company">
                     <h2 class="footer__title">
-                        <span class="c-main">Бумажечка - </span>
+                        <span class="c-main"><?php echo esc_html(get_field("c_name", "options")); ?> - </span>
                         цифровая типография в Москве
                     </h2>
-                    <a href="#" class="footer__logo logo">
-                        <?php the_field("c_name", "options"); ?>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="footer__logo logo">
+                        <?php echo esc_html(get_field("c_name", "options")); ?>
                     </a>
                 </div>
+                
+                <?php if(have_rows('footer_menu', 'option')): ?>
+                <nav class="footer__nav">
+                    <ul class="footer__nav-list">
+                        <?php while(have_rows('footer_menu', 'option')): the_row(); 
+                            $menu_item = get_sub_field('footer_menu_item');
+                            $text = $menu_item['f_menu_item_text'];
+                            $link = $menu_item['f_menu_item_link'];
+                        ?>
+                        <li class="footer__nav-item">
+                            <a class="footer__nav-link" href="<?php echo esc_url($link); ?>">
+                                <?php echo esc_html($text); ?>
+                            </a>
+                        </li>
+                        <?php endwhile; ?>
+                    </ul>
+                </nav>
+                <?php else: ?>
+                <!-- Fallback навигация -->
                 <nav class="footer__nav">
                     <ul class="footer__nav-list">
                         <li class="footer__nav-item">
-                            <a class="footer__nav-link" href="">О нас</a>
+                            <a class="footer__nav-link" href="/about">О нас</a>
                         </li>
                         <li class="footer__nav-item">
-                            <a class="footer__nav-link" href="">Оборудование</a>
+                            <a class="footer__nav-link" href="/equipment">Оборудование</a>
                         </li>
                         <li class="footer__nav-item">
-                            <a class="footer__nav-link" href="">Справочная</a>
-                        </li>
-                        <li class="footer__nav-item">
-                            <a class="footer__nav-link" href="">FAQ</a>
-                        </li>
-                        <li class="footer__nav-item">
-                            <a class="footer__nav-link" href="">Оплата</a>
-                        </li>
-                        <li class="footer__nav-item">
-                            <a class="footer__nav-link" href="">Доставка</a>
+                            <a class="footer__nav-link" href="/help">Справочная</a>
                         </li>
                     </ul>
                 </nav>
+                <?php endif; ?>
+                
+                <?php if(have_rows('footer_services', 'option')): ?>
+                <div class="footer__services">
+                    <ul class="footer__services-list">
+                        <?php while(have_rows('footer_services', 'option')): the_row(); 
+                            $service_item = get_sub_field('footer_service_item');
+                            $service = $service_item['footer_service_obj'] ;
+                            
+                            if($service):
+                        ?>
+                        <li class="footer__services-item">
+                            <a class="footer__services-link" href="<?php echo esc_url(get_permalink($service->ID)); ?>">
+                                <?php echo esc_html(get_the_title($service->ID)); ?>
+                            </a>
+                        </li>
+                        <?php 
+                            endif;
+                        endwhile; ?>
+                    </ul>
+                </div>
+                <?php else: ?>
+                <!-- Fallback услуг -->
                 <div class="footer__services">
                     <ul class="footer__services-list">
                         <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Визитки</a>
+                            <a class="footer__services-link" href="/visiting-cards">Визитки</a>
                         </li>
                         <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Листовки</a>
-                        </li>
-                        <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Буклеты</a>
-                        </li>
-                        <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Открытки</a>
-                        </li>
-                        <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Наклейки</a>
-                        </li>
-                        <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Меню</a>
-                        </li>
-                        <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Лифтет/гармошки/евробуклеты</a>
-                        </li>
-                        <li class="footer__services-item">
-                            <a class="footer__services-link" href="">Каталоги/Брошюры</a>
+                            <a class="footer__services-link" href="/flyers">Листовки</a>
                         </li>
                     </ul>
                 </div>
+                <?php endif; ?>
             </div>
+            
             <div class="footer__main-bottom container">
                 <div class="footer__contacts">
                     <address class="footer__contacts-address">
+                        <?php if($address = get_field("c_address", "options")): ?>
                         <span class="footer__contacts-item">
-                            <?php the_field("c_address", "options"); ?>
+                            <?php echo $address; ?>
                         </span>
+                        <?php endif; ?>
                     </address>
-                    <a href="tel:<?php echo wp_normalize_phone(get_field("c_phone", "option")); ?>"
-                        class="footer__contacts-item">
-                        <?php the_field("c_phone", "option"); ?>
+                    
+                    <?php if($phone = get_field("c_phone", "option")): ?>
+                    <a href="tel:<?php echo esc_attr(wp_normalize_phone($phone)); ?>" class="footer__contacts-item">
+                        <?php echo esc_html($phone); ?>
                     </a>
-                    <a href="mailto:<?php the_field("c_email", "option"); ?>" class="footer__contacts-item">
-                        <?php the_field("c_email", "option"); ?>
+                    <?php endif; ?>
+                    
+                    <?php if($email = get_field("c_email", "option")): ?>
+                    <a href="mailto:<?php echo esc_attr($email); ?>" class="footer__contacts-item">
+                        <?php echo esc_html($email); ?>
                     </a>
+                    <?php endif; ?>
                 </div>
-                <a href="" class="footer__button button">
-                    <span>
-                        Политика конфиденциальности
-                    </span>
+                
+                <?php if($privacy_policy = get_field("c_privacy_policy", "option")): ?>
+                <a href="<?php echo esc_url($privacy_policy); ?>" class="footer__button button">
+                    <span>Политика конфиденциальности</span>
                 </a>
+                <?php endif; ?>
             </div>
         </div>
+        
         <div class="footer__bottom">
             <div class="footer__bottom-inner container">
                 <div class="footer__bottom-ps">
                     <p>
-                        Информация на данном интернет-сайте носит информационный
-                        характер
+                        Информация на данном интернет-сайте носит информационный характер
                         и не является публичной офертой, определяемой положениями
                         Статьи 437 (2) ГК РФ
                     </p>
@@ -104,7 +129,8 @@
                     <span>сайт сделан</span>
                     <a href="#" target="_blank" rel="noopener noreferrer">
                         <img width="160" height="29" loading="lazy"
-                            src="<?php echo get_template_directory_uri(); ?>/images/icons/babushka.svg" alt="">
+                            src="<?php echo esc_url(get_template_directory_uri() . '/images/icons/babushka.svg'); ?>" 
+                            alt="Разработчик сайта">
                     </a>
                 </div>
             </div>

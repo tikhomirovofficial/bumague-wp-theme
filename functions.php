@@ -179,7 +179,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 if (function_exists("acf_add_options_page")) {
     acf_add_options_page(array(
-        "page_title" => "Настройка общего контента",
+        "page_title" => "Настройка общего контента, который повторяется на разных страницах",
         "menu_title" => "Общий контент",
         "menu_slug"  => "theme_settings",
     ));
