@@ -2876,7 +2876,7 @@ h4 {
   row-gap: 40px;
 }
 .welcome__strengths .print {
-height: 100%;
+  height: 100%;
 }
 
 .reviews {
@@ -4530,7 +4530,8 @@ input:checked ~ .calculator__option-checkbox::after {
   margin-top: 0;
   font-weight: 600;
 }
-.article__content section:not(:last-child) {
+.article__content section:not(:last-child),
+.article__content > div:not(:last-child) {
   margin-bottom: var(--articleBlocksGap);
 }
 .article__content img {
@@ -4912,12 +4913,23 @@ input:checked ~ .calculator__option-checkbox::after {
   flex-direction: column;
   gap: 60px;
 }
+
+.load-more-container {
+  margin-top: 60px;
+  grid-column: 1 / -1;
+  max-width: fit-content;
+  margin-left: auto;
+}
 @media (max-width: 710px) {
   .portfolio__gallery {
     gap: 20px;
   }
+  .load-more-container {
+    margin-top: 20px;
+  }
 }
-.portfolio__gallery-load {
+.portfolio__gallery-load,
+.blog__load-btn {
   display: flex;
   gap: 15px;
   font-weight: 600;
@@ -4925,11 +4937,13 @@ input:checked ~ .calculator__option-checkbox::after {
   font-size: 25px;
 }
 @media (max-width: 710px) {
-  .portfolio__gallery-load {
+  .portfolio__gallery-load,
+  .blog__load-btn {
     font-size: clamp(12px, 25 / var(--screen) * 100vw, 25px);
   }
 }
-.portfolio__gallery-load img {
+.portfolio__gallery-load img,
+.blog__load-btn img {
   aspect-ratio: 1;
   height: 1em;
 }

@@ -10,7 +10,7 @@
             <div class="footer__main-top container">
                 <div class="footer__company">
                     <h2 class="footer__title">
-                        <span class="c-main"><?php echo esc_html(get_field("c_name", "options")); ?> - </span>
+                        <span class="c-main">Бумажечка</span>
                         цифровая типография в Москве
                     </h2>
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="footer__logo logo">

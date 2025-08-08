@@ -50,6 +50,7 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/styles.css">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/swiper-bundle.min.css">
 	<script src="<?php echo get_template_directory_uri(); ?>/js/swiper-bundle.min.js"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/js/jquery-3.7.1.min.js"></script>
 	<?php wp_head(); ?>
 </head>
 

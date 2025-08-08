@@ -89,7 +89,7 @@
                 </ul>
             <?php endif; ?>
 
-            <a href="#" class="button faq__link">
+            <a href="<?php the_field('faq_link', 'options'); ?>" class="button faq__link">
                 <span>Справочная</span>
             </a>
         </div>

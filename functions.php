@@ -222,3 +222,73 @@ add_shortcode('normalize_phone', function($atts) {
     $atts = shortcode_atts(['phone' => ''], $atts);
     return wp_normalize_phone($atts['phone']);
 });
+
+
+// Добавьте это в functions.php
+
+// Обработчик AJAX для фильтрации
+add_action('wp_ajax_filter_blog_by_category', 'filter_blog_by_category_callback');
+add_action('wp_ajax_nopriv_filter_blog_by_category', 'filter_blog_by_category_callback');
+
+function filter_blog_by_category_callback() {
+    // Проверка nonce для безопасности
+    check_ajax_referer('filter_blog_nonce', 'security');
+    
+    $category = sanitize_text_field($_POST['category'] ?? 'all');
+    $page = absint($_POST['page'] ?? 1);
+    
+    $args = [
+        'post_type'      => 'post',
+        'posts_per_page' => 3,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'post_status'    => 'publish',
+        'paged'         => $page
+    ];
+    
+    // Фильтр по рубрике если выбрана конкретная
+    if ($category !== 'all') {
+        $args['tax_query'] = [
+            [
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => $category
+            ]
+        ];
+    }
+    
+    $query = new WP_Query($args);
+    
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $article_img = get_field('article_img');
+            ?>
+            <div class="blog__item">
+                <article class="blog-item">
+                    <div class="blog-item__info">
+                        <div class="blog-item__img" 
+                            style="background-image: url('<?php echo $article_img ? esc_url($article_img) : esc_url(get_template_directory_uri() . '/images/articles/bg.jpg'); ?>')">
+                        </div>
+                        <h3 class="blog-item__title">
+                            <?php echo esc_html(get_the_title()); ?>
+                        </h3>
+                    </div>
+                    <a href="<?php echo esc_url(get_permalink()); ?>" class="blog-item__link">
+                        <div class="blog-item__link-text">
+                            <span>больше</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.832 4.01887V11M10.832 11H3.8509M10.832 11L0.832031 1" stroke="#9896A5" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <span class="blog-item__link-hovered">читать</span>
+                    </a>
+                </article>
+            </div>
+            <?php
+        }
+        wp_reset_postdata();
+    }
+    
+    wp_die(); // Обязательно завершаем AJAX-запрос
+}
