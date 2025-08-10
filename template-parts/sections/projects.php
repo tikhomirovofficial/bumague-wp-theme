@@ -38,7 +38,7 @@
                 if ($portfolio_link):
                  
                     ?>
-                    <a href="<?php echo esc_url($link_url); ?>" class="button projects__link">
+                    <a href="<?php echo esc_url($portfolio_link); ?>" class="button projects__link">
                         <spa>Все работы</span>
                     </a>
                 <?php endif; ?>

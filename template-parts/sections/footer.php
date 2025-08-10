@@ -10,8 +10,7 @@
             <div class="footer__main-top container">
                 <div class="footer__company">
                     <h2 class="footer__title">
-                        <span class="c-main">Бумажечка</span>
-                        цифровая типография в Москве
+                        <?php echo get_field("footer_title", "options"); ?>
                     </h2>
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="footer__logo logo">
                         <?php echo esc_html(get_field("c_name", "options")); ?>
@@ -108,7 +107,7 @@
                     <?php endif; ?>
                 </div>
                 
-                <?php if($privacy_policy = get_field("c_privacy_policy", "option")): ?>
+                <?php if($privacy_policy = get_field("c_privacy", "option")): ?>
                 <a href="<?php echo esc_url($privacy_policy); ?>" class="footer__button button">
                     <span>Политика конфиденциальности</span>
                 </a>

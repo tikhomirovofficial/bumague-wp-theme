@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Открываем текущий dropdown
             customDropdown.classList.toggle('field__select-dropdown--visible');
-
         });
 
         // Обработчики для опций
@@ -140,4 +139,44 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ДОБАВЛЕННЫЙ КОД ДЛЯ КНОПКИ "ЗАКАЗАТЬ САМОСТОЯТЕЛЬНО"
+    const selfOrderBtn = document.querySelector('.service-hero__buttons .button:not(.button--accent)');
+    console.log(selfOrderBtn);
+    
+    if (selfOrderBtn) {
+        selfOrderBtn.addEventListener('click', function (e) {
+            console.log(e);
+            
+            const serviceTitle = e.currentTarget.dataset.service
+         
+
+            if (serviceTitle) {
+                document.querySelectorAll('.field--select').forEach(selectField => {
+                    const realSelect = selectField.querySelector('.field__select-real');
+                    const customInput = selectField.querySelector('.field__select-input');
+                    const customOptions = selectField.querySelectorAll('.field__select-option');
+
+                    let foundOption = null;
+                    customOptions.forEach(option => {
+                        if (option.textContent.trim() === serviceTitle) {
+                            foundOption = option;
+                        }
+                    });
+
+                    if (foundOption) {
+                        const value = foundOption.dataset.value;
+                        const text = foundOption.textContent;
+
+                        customInput.value = text.trim();
+                        realSelect.value = value;
+
+                        customOptions.forEach(opt => opt.classList.remove('selected'));
+                        foundOption.classList.add('selected');
+
+                        realSelect.dispatchEvent(new Event('change'));
+                    }
+                });
+            }
+        });
+    }
 });

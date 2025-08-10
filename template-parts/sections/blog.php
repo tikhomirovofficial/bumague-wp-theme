@@ -6,8 +6,8 @@
 // Получаем все рубрики (категории)
 $categories = get_categories([
     'taxonomy' => 'category', // Используем стандартную таксономию рубрик
-    'orderby' => 'name',
-    'order' => 'ASC',
+    'orderby' => 'date',
+    'order' => 'DESC',
     'hide_empty' => true // Только рубрики с постами
 ]);
 ?>
@@ -35,10 +35,10 @@ $categories = get_categories([
 
                 <div class="blog__list" id="blog-list">
                     <?php
-                    // Первоначальная загрузка последних 8 статей
+                    // Первоначальная загрузка последних 9 статей
                     $args = [
                         'post_type' => 'post',
-                        'posts_per_page' => 3,
+                        'posts_per_page' => 9,
                         'orderby' => 'date',
                         'order' => 'DESC',
                         'post_status' => 'publish'
@@ -82,7 +82,7 @@ $categories = get_categories([
                 </div>
 
                 <!-- Кнопка загрузки дополнительных статей -->
-                <?php if ($query->found_posts > 3): ?>
+                <?php if ($query->found_posts > 9): ?>
                     <div class="load-more-container">
                         <button class="blog-load blog__load-btn" id="load-more" class="button" data-page="1"
                             data-category="all">
@@ -129,7 +129,7 @@ $categories = get_categories([
                     $('#blog-list').html(response);
 
                     // Показываем/скрываем кнопку "Загрузить еще"
-                    if ($(response).filter('.blog__item').length < 3 || $(response).find('.no-more-posts').length) {
+                    if ($(response).filter('.blog__item').length < 9 || $(response).find('.no-more-posts').length) {
                         $('#load-more').hide();
                     } else {
                         $('#load-more').show();
@@ -168,7 +168,7 @@ $categories = get_categories([
                         `).prop('disabled', false);
 
                         // Скрываем кнопку если больше нет статей
-                        if ($(response).filter('.blog__item').length < 3) {
+                        if ($(response).filter('.blog__item').length < 9) {
                             button.hide();
                         }
                     } else {

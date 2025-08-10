@@ -78,18 +78,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Плавная прокрутка
-    document.querySelector(`.calculator__tab--active`).scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
-    });
+    // document.querySelector(`.calculator__tab--active`).scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'nearest'
+    // });
   }
   
-  // Отправка формы
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    console.log('Данные формы:', Object.fromEntries(formData));
-    alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
-    form.reset();
-  });
+  // // Отправка формы
+  // form.addEventListener('submit', function(e) {
+  //   e.preventDefault();
+  //   const formData = new FormData(form);
+  //   console.log('Данные формы:', Object.fromEntries(formData));
+  //   alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+  //   form.reset();
+  // });
 });

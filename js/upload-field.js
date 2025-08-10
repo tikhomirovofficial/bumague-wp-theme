@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.className = 'field__upload-delete';
-                deleteBtn.innerHTML = '<img src="<?php echo get_template_directory_uri(); ?>/images/icons/delete-upload.svg" alt="Удалить">';
+                deleteBtn.innerHTML = '<img src="../wp-content/themes/bumague/images/icons/delete-upload.svg" alt="Удалить">';
                 deleteBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     uploadedFiles.splice(index, 1);

@@ -14,7 +14,7 @@
             $service = get_sub_field('c_service_item');
             if ($service):
                 $service_title = get_the_title($service);
-                $service_description = get_field('service_description', $service->ID);
+                $service_description = get_field('service_mini_description', $service->ID);
                 $service_price = get_field('service_price_start', $service->ID);
                 ?>
                 <li class="services__item">

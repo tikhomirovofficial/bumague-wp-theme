@@ -10,12 +10,12 @@ Template Name: Шаблон "Главная страница"
 <main class="content">
     <?php get_template_part('template-parts/sections/home-welcome'); ?>
 
-    <?php if (get_field('h_show_work_steps')): ?>
-        <?php get_template_part('template-parts/sections/work-steps'); ?>
-    <?php endif; ?>
-
     <?php if (get_field('h_show_reviews')): ?>
         <?php get_template_part('template-parts/sections/reviews'); ?>
+    <?php endif; ?>
+
+    <?php if (get_field('h_show_work_steps')): ?>
+        <?php get_template_part('template-parts/sections/work-steps'); ?>
     <?php endif; ?>
 
     <?php if (get_field('h_show_equipment')): ?>
@@ -33,7 +33,6 @@ Template Name: Шаблон "Главная страница"
     <?php if (get_field('h_show_contacts')): ?>
         <?php get_template_part('template-parts/sections/contacts'); ?>
     <?php endif; ?>
-
 
 </main>
 

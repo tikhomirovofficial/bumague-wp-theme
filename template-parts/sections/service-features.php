@@ -14,7 +14,7 @@ $title = get_query_var('service_features_title', 'Продукты типогр�
             </h2>
             <div class="section__description section__description--wide">
                 <p>
-                    Точно в Цель: <?php echo esc_html($title); ?>, которые решают ваши задачи:
+                    Точно в Цель: <?php echo esc_html(mb_strtolower($title, 'UTF-8')); ?>, которые решают ваши задачи:
                     познакомить, запомниться, продать.
                 </p>
             </div>

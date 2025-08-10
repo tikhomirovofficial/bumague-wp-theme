@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectsSlider = new Swiper(".projects__slider", {
         grabCursor: true,
         loop: true,
-        centeredSlides: true,
+        // centeredSlides: true,
         spaceBetween: 20,
-        slidesPerView: 4,
+        slidesPerView: 4.2,
         // navigation: {
         //     nextEl: '.projects__next',
         //     prevEl: '.projects__prev',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 spaceBetween: 20
             },
             1160: {
-                slidesPerView: 4,
+                slidesPerView: 4.2,
                 spaceBetween: 20
             }
         }

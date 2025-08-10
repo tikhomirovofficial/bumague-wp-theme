@@ -95,7 +95,7 @@ get_header();
 				</div>
 
 				<div class="service-hero__buttons">
-					<button class="work-steps__button button button--accent" type="button">
+					<button data-modal="quick-request-window" class="button button--accent" type="button">
 						<div class="button__decoration">
 							<svg class="button__decoration-icon" width="62" height="101" viewBox="0 0 62 101"
 								fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +166,8 @@ get_header();
 							</svg>
 						</div>
 					</button>
-					<button type="button" class="button">
+					<button data-service="<?php echo get_the_title() ?>" data-modal="request-window" type="button"
+						class="button">
 						<span>Заказать самостоятельно</span>
 					</button>
 				</div>
@@ -175,12 +176,14 @@ get_header();
 	</section>
 
 	<?php get_template_part('template-parts/sections/calculator'); ?>
+
 	<?php set_query_var('service_features_title', get_the_title()); ?>
 	<?php get_template_part('template-parts/sections/service-features'); ?>
 
 	<?php get_template_part('template-parts/sections/prices'); ?>
 	<?php get_template_part('template-parts/sections/projects'); ?>
 	<?php get_template_part('template-parts/sections/hero'); ?>
+	<?php get_template_part('template-parts/sections/work-steps'); ?>
 	<?php get_template_part('template-parts/sections/reviews'); ?>
 	<?php get_template_part('template-parts/sections/common-services'); ?>
 	<?php get_template_part('template-parts/sections/faq'); ?>

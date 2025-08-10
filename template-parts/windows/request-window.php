@@ -17,7 +17,7 @@
         <form class="window__form">
             <div class="window__form-fields">
                 <label for="request-name" class="window__form-field field">
-                    <input required id="request-name" name="name" placeholder="Имя" type="text" class="field__input">
+                    <input  required id="request-name" name="name" placeholder="Имя" type="text" class="field__input">
                 </label>
                 <div class="window__form-field field field--select">
                     <div class="field__select-wrapper">
@@ -108,15 +108,54 @@
                             </div>
                         </div>
                         <div class="field__select-dropdown">
-                            <div class="field__select-option" data-value="1">Звонок на телефон</div>
-                            <div class="field__select-option" data-value="2">Сообщение в Whatsapp</div>
-                            <div class="field__select-option" data-value="3">Сообщение в Telegram</div>
+                            <?php
+                            if (have_rows('request_ways', 'option')):
+                                $index = 1;
+                                while (have_rows('request_ways', 'option')):
+                                    the_row();
+                                    $way = get_sub_field('request_ways_item');
+                                    if ($way):
+                                        ?>
+                                        <div class="field__select-option" data-value="<?php echo $index; ?>">
+                                            <?php echo esc_html($way); ?>
+                                        </div>
+                                        <?php
+                                        $index++;
+                                    endif;
+                                endwhile;
+                            else:
+                                // Fallback options if no communication ways are set
+                                ?>
+                                <div class="field__select-option" data-value="1">Звонок на телефон</div>
+                                <div class="field__select-option" data-value="2">Сообщение в Whatsapp</div>
+                                <div class="field__select-option" data-value="3">Сообщение в Telegram</div>
+                            <?php endif; ?>
                         </div>
                         <select required id="request-communication" name="communication" class="field__select-real"
                             required>
-                            <option value="1">Звонок на телефон</option>
-                            <option value="2">Сообщение в Whatsap</option>
-                            <option value="3">Сообщение в Telegram</option>
+                            <option value="">Выберите способ связи</option>
+                            <?php
+                            if (have_rows('request_ways', 'option')):
+                                $index = 1;
+                                while (have_rows('request_ways', 'option')):
+                                    the_row();
+                                    $way = get_sub_field('request_ways_item');
+                                    if ($way):
+                                        ?>
+                                        <option value="<?php echo $index; ?>">
+                                            <?php echo esc_html($way); ?>
+                                        </option>
+                                        <?php
+                                        $index++;
+                                    endif;
+                                endwhile;
+                            else:
+                                // Fallback options if no communication ways are set
+                                ?>
+                                <option value="1">Звонок на телефон</option>
+                                <option value="2">Сообщение в Whatsapp</option>
+                                <option value="3">Сообщение в Telegram</option>
+                            <?php endif; ?>
                         </select>
                     </div>
                 </fieldset>
@@ -156,4 +195,28 @@
             </button>
         </form>
     </div>
+</dialog>
+<dialog onclose="window.location.reload()" class="window" id="request-success-window">
+    <form method="dialog" class="window__inner">
+        <header class="window__header">
+            <h2 class="window__title"></h2>
+            <button class="window__close-btn">
+                <img height="17" width="17" src="<?php echo get_template_directory_uri(); ?>/images/icons/close.svg"
+                    alt="">
+            </button>
+        </header>
+        <div class="window__content">
+            <h2 class="window__title">Спасибо за вашу заявку</h2>
+            <div class="window__description">
+                <p>
+                    Наш менеджер вернётся к вам с уточнениями для просчёта заказа
+                </p>
+            </div>
+        </div>
+        <button class="button window__form-button">
+            <span>
+                Хорошо
+            </span>
+        </button>
+    </form>
 </dialog>

@@ -1,30 +1,21 @@
 <?php
 /**
- * Секция приветствия на главной
+ * Секция "Услуги ресторанам"
  */
 ?>
 
-<section class="section section--welcome section--decoration-l">
-    <header class="section__header container">
+<section class="section">
+    <header class="section__header restaurant-section-header container">
         <div class="section__header-info">
             <h1 class="section__title section__title--wide">
-                <?php the_field('home_title'); ?>
+                <?php the_field('rs_title'); ?>
             </h1>
             <div class="section__description section__description--wide">
-                <?php the_field('home_description'); ?>
+                <?php the_field('rs_description'); ?>
             </div>
         </div>
-        <div class="section__header-additional">
-            <div class="slogan">
-                <?php if (have_rows('home_slogan')): ?>
-                    <?php while (have_rows('home_slogan')):
-                        the_row(); ?>
-                        <div class="slogan__line"><span><?php the_sub_field('home_s_1'); ?></span></div>
-                        <div class="slogan__line"><span><?php the_sub_field('home_s_2'); ?></span></div>
-                        <div class="slogan__line"><span><?php the_sub_field('home_s_3'); ?></span></div>
-                    <?php endwhile; ?>
-                <?php endif; ?>
-            </div>
+        <div class="section__header-additional restaurant-section-additional">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/icons/m_decoration.svg" alt="">
             <button data-modal="quick-request-window" class="button button--accent" type="button">
                 <div class="button__decoration">
                     <svg class="button__decoration-icon" width="62" height="101" viewBox="0 0 62 101" fill="none"
@@ -99,30 +90,122 @@
         </div>
     </header>
     <div class="section__body">
-        <div id="home-services" class="welcome container">
-            <div class="services services--big welcome__services">
-                <h2 class="services__title title--alt">
-                    Наши услуги
-                </h2>
-                <?php get_template_part('template-parts/blocks/services-list'); ?>
-                <button data-modal="request-window" class="button button--unfilled services__button" type="button">
-                    <span>
-                        Оставить заявку
-                    </span>
-                </button>
-                <?php if ($caption = get_field('c_services_caption', 'option')): ?>
-                    <div class="services__caption">
-                        <p><?php echo esc_html($caption); ?></p>
-                    </div>
-                <?php endif; ?>
-            </div>
-            <div class="welcome__strengths">
-                <?php get_template_part('template-parts/blocks/print'); ?>
-                <?php get_template_part('template-parts/blocks/features'); ?>
-                <?php get_template_part('template-parts/blocks/clients'); ?>              
+        <div class="restaurant section--decoration-cells">
+            <img class="restaurant__decoration"
+                src="<?php echo get_template_directory_uri(); ?>/images/restaurant/restaurant-decoration.svg" alt="">
+            <img class="restaurant__decoration"
+                src="<?php echo get_template_directory_uri(); ?>/images/restaurant/restaurant-decoration.svg" alt="">
+            <div class="restaurant__inner container">
+                <h2 class="restaurant__title"><?php the_field('rs_s_title'); ?></h2>
+
+
+                <div class="restaurant__services">
+                    <?php if (have_rows('rs_s_list')): ?>
+                        <div class="restaurant__services-grid">
+                            <?php while (have_rows('rs_s_list')):
+                                the_row();
+                                $name = get_sub_field('rs_s_i_name');
+                                $description = get_sub_field('rs_s_i_description');
+                                $price = get_sub_field('rs_s_i_price');
+                                $image = get_sub_field('rs_s_i_img');
+                                ?>
+                                <div class="restaurant__services-item">
+                                    <div class="restaurant-item">
+                                        <div style="background-image: url('<?php echo esc_url($image); ?>');"
+                                            class="restaurant-item__img"></div>
+                                        <div class="restaurant-item__info">
+                                            <h3 class="restaurant-item__title"><?php echo esc_html($name); ?></h3>
+                                            <div class="restaurant-item__description">
+                                                <p><?php echo esc_html($description); ?></p>
+                                            </div>
+                                            <span class="restaurant-item__price">
+                                                от <?php echo esc_html($price); ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+
+                            <div class="restaurant__services-item restaurant__services-caption">
+                                <?php the_field('rs_s_caption'); ?>
+                            </div>
+                            <div class="restaurant__services-item restaurant__services-buttons">
+                                <button data-modal="request-window" class="button restaurant__services-button"
+                                    type="button">
+                                    <span>Рассчитать заказ</span>
+                                </button>
+                                <button data-modal="quick-request-window"
+                                    class="button button--unfilled restaurant__services-button" type="button">
+                                    <span>Заказать дизайн</span>
+                                </button>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
-
     </div>
+</section>
+
+<section class="section">
+    <header class="section__header container">
+        <div class="section__header-info">
+            <h2 class="section__title">
+                <?php the_field('rs_r_title'); ?>
+            </h2>
+            <?php if (get_field('rs_r_description')): ?>
+                <div class="section__description section__description--medium">
+                    <?php the_field('rs_r_description'); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </header>
+    <div class="section__body">
+        <div class="running-rows">
+            <?php if (have_rows('rs_r_list')):
+                // Получаем все элементы для повторного использования
+                $items = array();
+                while (have_rows('rs_r_list')):
+                    the_row();
+                    $items[] = array(
+                        'name' => get_sub_field('rs_s_r_name'),
+                        'image' => get_sub_field('rs_s_r_img')
+                    );
+                endwhile;
+
+                // Создаем 3 ряда с разным порядком элементов
+                for ($i = 0; $i < 3; $i++):
+                    // Перемешиваем массив для каждого ряда (кроме первого)
+                    if ($i > 0) {
+                        $shuffled_items = $items;
+                        shuffle($shuffled_items);
+                    } else {
+                        $shuffled_items = $items;
+                    }
+                    ?>
+                    <div class="running-rows__row">
+                        <?php
+                        // Выводим оригинальные элементы
+                        foreach ($shuffled_items as $item): ?>
+                            <div class="running-rows__item">
+                                <div style="background-image: url('<?php echo esc_url($item['image']); ?>')"
+                                    class="running-rows__item-img"></div>
+                                <span class="running-rows__title"><?php echo esc_html($item['name']); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+
+                        <?php
+                        // Дублируем элементы для бесконечной анимации
+                        foreach ($shuffled_items as $item): ?>
+                            <div class="running-rows__item">
+                                <div style="background-image: url('<?php echo esc_url($item['image']); ?>')"
+                                    class="running-rows__item-img"></div>
+                                <span class="running-rows__title"><?php echo esc_html($item['name']); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endfor; ?>
+            <?php endif; ?>
+        </div>
     </div>
 </section>

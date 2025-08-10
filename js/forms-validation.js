@@ -12,8 +12,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!isRadioChecked) isFormValid = false;
             } 
             // Для стандартных полей и select
-            else if (input.value.trim() === '') {
-                isFormValid = false;
+            else {
+                const value = input.value.trim();
+                
+                // Проверка поля имени
+                if (input.name === 'name') {
+                    if (value.length < 3 || value.length > 32) {
+                        isFormValid = false;
+                    }
+                }
+                
+                // Проверка поля телефона
+                if (input.name === 'phone' && input.classList.contains('phone-mask')) {
+                    // Проверяем, что телефон заполнен полностью (предполагаем, что маска добавляет символы)
+                    // Например, проверяем, что в поле больше 10 цифр (можно настроить под вашу маску)
+                    const phoneDigits = value.replace(/\D/g, '');
+                    if (phoneDigits.length < 11) { // Пример для российских номеров
+                        isFormValid = false;
+                    }
+                }
+                
+                // Общая проверка для остальных обязательных полей
+                if (value === '' && input.name !== 'name' && input.name !== 'phone') {
+                    isFormValid = false;
+                }
             }
             
             // Для кастомных select проверяем видимое поле ввода
@@ -52,6 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
             else {
                 input.addEventListener('input', () => checkFormValidity(form, submitButton));
                 input.addEventListener('change', () => checkFormValidity(form, submitButton));
+                
+                // Добавляем валидацию при потере фокуса для имени и телефона
+                if (input.name === 'name' || (input.name === 'phone' && input.classList.contains('phone-mask'))) {
+                    input.addEventListener('blur', () => checkFormValidity(form, submitButton));
+                }
             }
             
             // Для кастомных select дополнительный обработчик

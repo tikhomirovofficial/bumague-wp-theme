@@ -8,7 +8,7 @@
     <header class="section__header container">
         <div class="section__header-info">
             <h1 class="section__title">
-                <span class="c-main"><?php the_field('all_eq_title'); ?></span>
+               <?php the_field('all_eq_title'); ?>
             </h1>
             <div class="section__description section__description--wide">
                 <?php the_field('all_eq_description'); ?>

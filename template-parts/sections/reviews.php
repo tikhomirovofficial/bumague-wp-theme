@@ -35,9 +35,10 @@
                             $avatar = $item['review_avatar'];
                             $text = $item['review_text'];
                             $highlight = $item['review_highlight'];
+                            $date = $item['review_date'];
                             ?>
                             <div class="reviews__slider-item swiper-slide">
-                                <article class="review-item <?php echo $highlight ? 'review-item-highlight' : ''; ?>">
+                                <article class="review-item <?php echo $highlight ? 'review-item--highlight' : ''; ?>">
                                     <header class="review-item__header">
                                         <div class="review-item__profile">
                                             <?php if ($avatar): ?>
@@ -58,8 +59,8 @@
                                                 <?php endif; ?>
                                             </div>
                                         </div>
-                                        <time class="review-item__date" datetime="<?php echo date('Y-m-d'); ?>">
-                                            <?php echo date('d.m.Y'); ?>
+                                        <time class="review-item__date" datetime="<?php echo $date ?>">
+                                            <?php echo $date; ?>
                                         </time>
                                     </header>
                                     <?php if ($text): ?>
@@ -87,9 +88,18 @@
                     </button>
                 </div>
             </div>
-            <a href="#" class="button reviews__link">
-                <span>Все отзывы</span>
-            </a>
+
+
+            <?php
+
+            $all_reviews_link = get_field('reviews_link', 'option');
+
+            ?>
+            <?php if ($all_reviews_link): ?>
+                <a href="<?php echo esc_url($all_reviews_link); ?>" class="button reviews__link">
+                    <span>Все отзывы</span>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </section>

@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Шаблон "Справочная страница"
+Template Name: Шаблон "Ресторанам"
 */
 
 ?>
@@ -9,13 +9,12 @@ Template Name: Шаблон "Справочная страница"
 
 <main class="content">
 
-    <?php get_template_part('template-parts/sections/blog'); ?>
+    <?php get_template_part('template-parts/sections/restaurant-services'); ?>
     <?php get_template_part('template-parts/sections/work-steps'); ?>
     <?php get_template_part('template-parts/sections/reviews'); ?>
     <?php get_template_part('template-parts/sections/common-services'); ?>
     <?php get_template_part('template-parts/sections/faq'); ?>
     <?php get_template_part('template-parts/sections/contacts'); ?>
-
 </main>
 
 
