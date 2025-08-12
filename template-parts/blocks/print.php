@@ -3,9 +3,11 @@
  * Секция "Печать для ресторанов" (переиспользуемая)
  * 
  */
+
+$print_link = get_field('c_print_link', 'option');
 ?>
 
-<div class="print">
+<a href="<?php echo $print_link; ?>" class="print">
     <?php
     // Получаем данные из option-полей
     $print_img = get_field('c_print_img', 'option');
@@ -37,4 +39,4 @@
             ?>
         </p>
     </div>
-</div>
+</a>

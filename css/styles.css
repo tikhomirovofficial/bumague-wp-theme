@@ -956,6 +956,11 @@ h4 {
 .button--accent svg {
   color: unset;
 }
+
+.button--accent span {
+    margin-left: -3.5%;
+}
+
 @media (hover: hover) {
   .button--accent:hover {
     background-color: var(--c-accent-active);
@@ -986,6 +991,13 @@ h4 {
     opacity: 0;
   }
 }
+
+@media (max-width: 710px) {
+  .button--accent span {
+    margin-left: -5%;
+  }
+}
+
 .button:disabled {
   background-color: var(--c-gray-dk);
 }
@@ -1142,7 +1154,9 @@ h4 {
   overflow: hidden;
   background-color: var(--c-accent);
   border-radius: var(--b-radius-l);
+  display: block;
 }
+
 @media (max-width: 710px) {
   .print {
     padding: 40px clamp(15px, 2.77vw, 20px);
@@ -2514,8 +2528,8 @@ h4 {
 }
 .device-item__img {
   width: auto;
-  flex-grow: 1;
-  max-width: 50%;
+  max-width: 45%;
+  max-height: 251px;
 }
 .device-item__img img {
   width: auto;
@@ -2691,10 +2705,19 @@ h4 {
   border-radius: var(--b-radius-m);
   border: var(--border);
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .blog-item__title {
   font-size: clamp(20px, 1.3020833333vw, 25px);
   font-weight: 600;
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+.blog-item__title::first-letter {
+  text-transform: uppercase;
 }
 @media (max-width: 960px) {
   .blog-item__title {
@@ -2844,6 +2867,11 @@ h4 {
     align-self: flex-end;
     margin-bottom: 0;
   }
+}
+.section__title b,
+.section__description b {
+  font-weight: inherit;
+  color: var(--c-main);
 }
 .section__title {
   max-width: 10.7142857143em;
@@ -3755,7 +3783,7 @@ h4 {
   gap: 40px;
 }
 .service-hero__title {
-  max-width: 12.1285714286em;
+  max-width: 13.1285714286em;
   margin-bottom: 40px;
 }
 .service-hero__description {
@@ -3776,7 +3804,7 @@ h4 {
 
 @media (max-width: 960px) {
   .service-hero__features-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 @media (max-width: 710px) {
@@ -3796,6 +3824,18 @@ h4 {
 }
 .service-hero__features-item--6 {
   grid-column: 1/-1;
+}
+
+@media (max-width: 960px) {
+  .service-hero__features-item--6 {
+    grid-column: span 4;
+  }
+  .service-hero__features-item--6 + .service-hero__features-item {
+    grid-column: span 4;
+  }
+  .service-hero__features-item--3 {
+    grid-column: span 2;
+  }
 }
 .service-hero__features-item .quality-item {
   height: 100%;
@@ -3967,6 +4007,7 @@ h4 {
 }
 .calculator__steps-item-number {
   display: none;
+  line-height: 1;
 }
 @media (max-width: 960px) {
   .calculator__steps-item-number {
@@ -4305,6 +4346,7 @@ input:checked ~ .calculator__option-checkbox::after {
   .prices__tabs-item {
     font-size: clamp(14px, 18 / var(--screen) * 100vw, 18px);
     min-height: 40px;
+    padding: 6px 0;
   }
 }
 .prices__tabs-item-caption {
@@ -4375,7 +4417,7 @@ input:checked ~ .calculator__option-checkbox::after {
 @media (max-width: 710px) {
   .prices__table th,
   .prices__table td {
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
   }
 }
 
@@ -4460,6 +4502,10 @@ input:checked ~ .calculator__option-checkbox::after {
 
 @media (max-width: 1160px) {
   .common-services__print {
+    display: none;
+  }
+
+  .common-services__grid .print {
     display: none;
   }
 }
@@ -4568,7 +4614,7 @@ input:checked ~ .calculator__option-checkbox::after {
   font-weight: 600;
 }
 .article__content section:not(:last-child),
-.article__content > div:not(:last-child) {
+.article__content > div:not(:last-child), .article__content .wp-block-group {
   margin-bottom: var(--articleBlocksGap);
 }
 .article__content img {
@@ -4588,6 +4634,9 @@ input:checked ~ .calculator__option-checkbox::after {
 @media (max-width: 710px) {
   .article__content h3 {
     font-size: clamp(25px, 30 / var(--screen) * 100vw, 30px);
+  }
+  .article__content h2 {
+    font-size: clamp(25px, 40 / var(--screen) * 100vw, 40px);
   }
 }
 .article__content h3:not(:last-child) {
@@ -5057,6 +5106,9 @@ input:checked ~ .calculator__option-checkbox::after {
 .blog__tabs::-webkit-scrollbar {
   display: none;
 }
+.blog__item {
+  display: block;
+}
 @media (max-width: 960px) {
   .blog__tabs {
     gap: 5px;
@@ -5166,6 +5218,7 @@ input:checked ~ .calculator__option-checkbox::after {
 }
 .company-qualities__list .quality-item .quality-item__title {
   font-size: clamp(20px, 1.8229166667vw, 35px);
+  max-width: 85%;
 }
 @media (max-width: 960px) {
   .company-qualities__list .quality-item .quality-item__title {

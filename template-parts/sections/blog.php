@@ -8,7 +8,7 @@ $categories = get_categories([
     'taxonomy' => 'category', // Используем стандартную таксономию рубрик
     'orderby' => 'date',
     'order' => 'DESC',
-    'hide_empty' => true // Только рубрики с постами
+    'hide_empty' => false // Только рубрики с постами
 ]);
 ?>
 
@@ -51,7 +51,7 @@ $categories = get_categories([
                             $query->the_post();
                             $article_img = get_field('article_img'); // ACF поле для изображения
                             ?>
-                            <div class="blog__item">
+                            <a href="<?php echo esc_url(get_permalink()); ?>" class="blog__item">
                                 <article class="blog-item">
                                     <div class="blog-item__info">
                                         <div class="blog-item__img"
@@ -61,7 +61,7 @@ $categories = get_categories([
                                             <?php echo esc_html(get_the_title()); ?>
                                         </h3>
                                     </div>
-                                    <a href="<?php echo esc_url(get_permalink()); ?>" class="blog-item__link">
+                                    <div class="blog-item__link">
                                         <div class="blog-item__link-text">
                                             <span>больше</span>
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -71,9 +71,9 @@ $categories = get_categories([
                                             </svg>
                                         </div>
                                         <span class="blog-item__link-hovered">читать</span>
-                                    </a>
+                                    </div>
                                 </article>
-                            </div>
+                            </a>
                         <?php endwhile;
                         wp_reset_postdata();
                     else: ?>

@@ -15,7 +15,7 @@
         </div>
     </header>
     <div class="section__body">
-        <div class="faq container">
+        <div id="faq" class="faq container">
             <?php if (have_rows('faq_groups', 'options')): ?>
                 <ul class="faq__list">
                     <?php

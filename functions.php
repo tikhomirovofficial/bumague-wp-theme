@@ -300,66 +300,69 @@ function filter_blog_by_category_callback()
     wp_die(); // Обязательно завершаем AJAX-запрос
 }
 
-// Обработчик AJAX для фильтрации портфолио
-add_action('wp_ajax_filter_portfolio', 'filter_portfolio_callback');
-add_action('wp_ajax_nopriv_filter_portfolio', 'filter_portfolio_callback');
+add_action('wp_ajax_filter_portfolio_gallery', 'filter_portfolio_gallery');
+add_action('wp_ajax_nopriv_filter_portfolio_gallery', 'filter_portfolio_gallery');
 
-function filter_portfolio_callback()
-{
-    // Проверка nonce для безопасности
+function filter_portfolio_gallery() {
     check_ajax_referer('portfolio_nonce', 'security');
-
-    $category = sanitize_text_field($_POST['category'] ?? 'all');
-    $page = absint($_POST['page'] ?? 1);
-
+    
+    $category = isset($_POST['category']) ? $_POST['category'] : 'all';
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $per_page = 12;
+    
+    $all_images = [];
+    
+    // Получаем все записи портфолио
     $args = [
-        'post_type' => 'gallery',
-        'posts_per_page' => 12,
-        'orderby' => 'date',
-        'order' => 'DESC',
+        'post_type' => 'gallery_category',
+        'posts_per_page' => -1,
         'post_status' => 'publish',
-        'paged' => $page
+        'orderby' => 'date',
+        'order' => 'DESC'
     ];
-
-    // Фильтр по категории если выбрана конкретная
+    
     if ($category !== 'all') {
-        $args['tax_query'] = [
-            [
-                'taxonomy' => 'portfolio_category',
-                'field' => 'slug',
-                'terms' => $category
-            ]
-        ];
+        $args['p'] = $category;
     }
-
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            $gallery_img = get_field('gallery_img');
-            ?>
-            <li class="portfolio__gallery-item"
-                style="background-image: url('<?php echo $gallery_img ? esc_url($gallery_img) : esc_url(get_template_directory_uri() . '/images/projects/portfolio.jpg'); ?>')"
-                data-categories="<?php
-                $terms = get_the_terms(get_the_ID(), 'portfolio_category');
-                if ($terms && !is_wp_error($terms)) {
-                    $term_slugs = array_map(function ($term) {
-                        return $term->slug;
-                    }, $terms);
-                    echo esc_attr(implode(' ', $term_slugs));
-                }
-                ?>">
-            </li>
-            <?php
+    
+    $portfolio_posts = get_posts($args);
+    
+    // Собираем все изображения
+    foreach ($portfolio_posts as $post) {
+        $gallery = get_field('gallery_folder', $post->ID);
+        if ($gallery) {
+            foreach ($gallery as $image) {
+                $all_images[] = [
+                    'url' => $image,
+                    'post_id' => $post->ID
+                ];
+            }
         }
-        wp_reset_postdata();
     }
-
-    wp_die(); // Обязательно завершаем AJAX-запрос
+    
+    // Пагинация
+    $total_images = count($all_images);
+    $offset = ($page - 1) * $per_page;
+    $current_images = array_slice($all_images, $offset, $per_page);
+    
+    // Вывод
+    if (!empty($current_images)) {
+        foreach ($current_images as $image) {
+            echo '<li class="portfolio__gallery-item" 
+                  style="background-image: url(\'' . esc_url($image['url']) . '\')"
+                  data-post="' . esc_attr($image['post_id']) . '"></li>';
+        }
+        
+        // Добавляем скрытый маркер, если это последняя страница
+        if (($offset + count($current_images)) >= $total_images) {
+            echo '<li class="no-more-items" style="display:none;"></li>';
+        }
+    } elseif ($page === 1) {
+        echo '<li class="no-projects">Работ не найдено</li>';
+    }
+    
+    wp_die();
 }
-
-
 // Обработчик для всех форм
 add_action('wp_ajax_submit_custom_form', 'handle_custom_form_submission');
 add_action('wp_ajax_nopriv_submit_custom_form', 'handle_custom_form_submission');
